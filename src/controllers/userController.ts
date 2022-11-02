@@ -1,9 +1,10 @@
 import User from "../models/userModel";
 import { NextFunction, Request, Response } from "express";
 import generateToken from "../utils/generateToken";
+import asyncHandler from "express-async-handler";
 
 //Register a new User
-const registerUser = async (req: any, res: any) => {
+const registerUser = asyncHandler(async (req: any, res: any) => {
   const { name, email, password } = req.body;
 
   const userExist = await User.findOne({ email });
@@ -30,9 +31,9 @@ const registerUser = async (req: any, res: any) => {
     res.status(400);
     throw new Error("Invalid user data");
   }
-};
+});
 
-const authUser = async (req: Request, res: Response) => {
+const authUser = asyncHandler(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
@@ -48,6 +49,6 @@ const authUser = async (req: Request, res: Response) => {
     res.status(401);
     throw new Error("Invalid email or password");
   }
-};
+});
 
 export { registerUser, authUser };
