@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
-import userRoutes from "./routes/userRoutes";
+import employeeRoutes from "./routes/employeeRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 
 dotenv.config();
@@ -12,7 +12,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/api/users", userRoutes);
+app.use("/api/employees", employeeRoutes);
 
 app.use(errorHandler);
 

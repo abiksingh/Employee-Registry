@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-export interface IUser extends Document {
+export interface IEmployee extends Document {
   name: string;
   email: string;
   password: string;
   matchPassword(password: string): boolean;
 }
 
-const userSchema = new mongoose.Schema(
+const employeeSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -30,11 +30,13 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.methods.matchPassword = async function (enteredPassword: string) {
+employeeSchema.methods.matchPassword = async function (
+  enteredPassword: string
+) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-userSchema.pre("save", async function (next) {
+employeeSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
@@ -43,6 +45,6 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-const User = mongoose.model<IUser>("User", userSchema);
+const Employee = mongoose.model<IEmployee>("Employee", employeeSchema);
 
-export default User;
+export default Employee;
