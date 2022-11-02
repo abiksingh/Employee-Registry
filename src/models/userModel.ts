@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  matchPassword(password: string): boolean;
+}
+
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -36,6 +43,6 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 
 export default User;
