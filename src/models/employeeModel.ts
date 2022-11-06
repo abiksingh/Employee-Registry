@@ -1,12 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-
-export interface IEmployee extends Document {
-  name: string;
-  email: string;
-  password: string;
-  matchPassword(password: string): boolean;
-}
+import { IEmployee } from "../interface/Employee";
 
 const employeeSchema = new mongoose.Schema(
   {

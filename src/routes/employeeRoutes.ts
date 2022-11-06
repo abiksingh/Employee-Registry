@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  addEmployees,
   authEmployee,
   getEmployees,
   registerEmployee,
@@ -10,7 +11,6 @@ const router = express.Router();
 
 router.route("/register").post(registerEmployee);
 router.route("/login").post(authEmployee);
-router.route("/").get(getEmployees);
-router.route("/home").post(protect, registerEmployee);
+router.route("/home").get(protect, getEmployees).post(protect, addEmployees);
 
 export default router;

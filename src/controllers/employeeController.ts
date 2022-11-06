@@ -2,6 +2,7 @@ import Employee from "../models/employeeModel";
 import { Request, Response } from "express";
 import generateToken from "../utils/generateToken";
 import asyncHandler from "express-async-handler";
+import AddEmployee from "../models/addEmployeeModel";
 
 const registerEmployee = asyncHandler(async (req: any, res: any) => {
   const { name, email, password } = req.body;
@@ -51,7 +52,42 @@ const authEmployee = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getEmployees = asyncHandler(async (req: Request, res: any) => {
-  return res.json(await Employee.find({}).select("-password"));
+  return res.json(await AddEmployee.find({}));
 });
 
-export { registerEmployee, authEmployee, getEmployees };
+const addEmployees = asyncHandler(async (req: Request, res: any) => {
+  const { username, email, firstName, lastName, role, address } = req.body;
+
+  const employeeExist = await AddEmployee.findOne({ email });
+
+  if (employeeExist) {
+    res.status(400);
+    throw new Error("Employee already exists");
+  }
+
+  const employee = await AddEmployee.create({
+    username,
+    email,
+    firstName,
+    lastName,
+    role,
+    address,
+  });
+
+  if (employee) {
+    res.status(201).json({
+      _id: employee._id,
+      username: employee.username,
+      email: employee.email,
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      role: employee.role,
+      address: employee.address,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid employee data");
+  }
+});
+
+export { registerEmployee, authEmployee, getEmployees, addEmployees };
