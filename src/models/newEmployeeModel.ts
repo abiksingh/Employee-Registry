@@ -34,9 +34,9 @@ const addEmployeeSchema = new mongoose.Schema(
   }
 );
 
-const AddEmployee = mongoose.model<IAddEmployee>(
+const NewEmployee = mongoose.model<IAddEmployee>(
   "AddEmployee",
   addEmployeeSchema
 );
 
-export default AddEmployee;
+export default NewEmployee;
