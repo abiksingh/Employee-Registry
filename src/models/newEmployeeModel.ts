@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IAddEmployee } from "../interface/Employee";
+import { INewEmployee } from "../interface/Employee";
 
 const commentSchema = new mongoose.Schema(
   {
@@ -22,7 +22,7 @@ const commentSchema = new mongoose.Schema(
   }
 );
 
-const addEmployeeSchema = new mongoose.Schema(
+const newEmployeeSchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -56,9 +56,9 @@ const addEmployeeSchema = new mongoose.Schema(
   }
 );
 
-const NewEmployee = mongoose.model<IAddEmployee>(
-  "AddEmployee",
-  addEmployeeSchema
+const NewEmployee = mongoose.model<INewEmployee>(
+  "NewEmployee",
+  newEmployeeSchema
 );
 
 export default NewEmployee;

@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface IEmployee extends Document {
   name: string;
   email: string;
@@ -5,7 +7,7 @@ export interface IEmployee extends Document {
   matchPassword(password: string): boolean;
 }
 
-export interface IAddEmployee extends Document {
+export interface INewEmployee extends Document {
   username: string;
   email: string;
   firstName: string;
@@ -13,4 +15,8 @@ export interface IAddEmployee extends Document {
   address: string;
   role: string;
   comment: any;
+}
+
+export interface IRequest extends Request {
+  employee?: any;
 }

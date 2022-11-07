@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
 import Employee from "../models/employeeModel";
 import expressAsyncHandler from "express-async-handler";
-import { NextFunction, Response } from "express";
+import { NextFunction, Response, Request } from "express";
+import { IRequest } from "../interface/Employee";
 
 const protect = expressAsyncHandler(
-  async (req: any, res: Response, next: NextFunction) => {
+  async (req: IRequest, res: Response, next: NextFunction) => {
     let token;
 
     if (

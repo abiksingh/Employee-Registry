@@ -3,8 +3,9 @@ import { Request, Response } from "express";
 import generateToken from "../utils/generateToken";
 import asyncHandler from "express-async-handler";
 import NewEmployee from "../models/newEmployeeModel";
+import { INewEmployee, IRequest } from "../interface/Employee";
 
-const registerEmployee = asyncHandler(async (req: any, res: any) => {
+const registerEmployee = asyncHandler(async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   const employeeExist = await Employee.findOne({ email });
@@ -51,11 +52,11 @@ const authEmployee = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-const getEmployees = asyncHandler(async (req: Request, res: any) => {
-  return res.json(await NewEmployee.find({}));
+const getEmployees = asyncHandler(async (req: Request, res: Response) => {
+  res.json(await NewEmployee.find({}));
 });
 
-const getEmployeeById = asyncHandler(async (req: Request, res: any) => {
+const getEmployeeById = asyncHandler(async (req: Request, res: Response) => {
   const employee = await NewEmployee.findById(req.params.id);
 
   if (employee) {
@@ -66,7 +67,7 @@ const getEmployeeById = asyncHandler(async (req: Request, res: any) => {
   }
 });
 
-const addEmployees = asyncHandler(async (req: Request, res: any) => {
+const addEmployees = asyncHandler(async (req: Request, res: Response) => {
   const { username, email, firstName, lastName, role, address } = req.body;
 
   const employeeExist = await NewEmployee.findOne({ email });
@@ -101,7 +102,7 @@ const addEmployees = asyncHandler(async (req: Request, res: any) => {
   }
 });
 
-const editEmployees = asyncHandler(async (req: Request, res: any) => {
+const editEmployees = asyncHandler(async (req: Request, res: Response) => {
   const { username, email, firstName, lastName, role, address } = req.body;
 
   const employee = await NewEmployee.findById(req.params.id);
@@ -131,7 +132,7 @@ const editEmployees = asyncHandler(async (req: Request, res: any) => {
   }
 });
 
-const deleteEmployee = asyncHandler(async (req, res) => {
+const deleteEmployee = asyncHandler(async (req: Request, res: Response) => {
   const employee = await NewEmployee.findById(req.params.id);
 
   if (employee) {
@@ -143,7 +144,7 @@ const deleteEmployee = asyncHandler(async (req, res) => {
   }
 });
 
-const addComment = asyncHandler(async (req: any, res) => {
+const addComment = asyncHandler(async (req: IRequest, res: Response) => {
   const { comment } = req.body;
 
   const employee = await NewEmployee.findById(req.params.id);
