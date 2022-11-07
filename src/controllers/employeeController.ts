@@ -55,6 +55,17 @@ const getEmployees = asyncHandler(async (req: Request, res: any) => {
   return res.json(await NewEmployee.find({}));
 });
 
+const getEmployeeById = asyncHandler(async (req: Request, res: any) => {
+  const employee = await NewEmployee.findById(req.params.id);
+
+  if (employee) {
+    res.json(employee);
+  } else {
+    res.status(404);
+    throw new Error("Employee not found");
+  }
+});
+
 const addEmployees = asyncHandler(async (req: Request, res: any) => {
   const { username, email, firstName, lastName, role, address } = req.body;
 
@@ -161,4 +172,5 @@ export {
   editEmployees,
   deleteEmployee,
   addComment,
+  getEmployeeById,
 };

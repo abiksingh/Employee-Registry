@@ -5,6 +5,7 @@ import {
   authEmployee,
   deleteEmployee,
   editEmployees,
+  getEmployeeById,
   getEmployees,
   registerEmployee,
 } from "../controllers/employeeController";
@@ -18,7 +19,8 @@ router.route("/home").get(protect, getEmployees).post(protect, addEmployees);
 router
   .route("/:id")
   .put(protect, editEmployees)
-  .delete(protect, deleteEmployee);
+  .delete(protect, deleteEmployee)
+  .get(protect, getEmployeeById);
 router.route("/employeeDetails/:id").post(protect, addComment);
 
 export default router;
