@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import generateToken from "../utils/generateToken";
 import asyncHandler from "express-async-handler";
 import NewEmployee from "../models/newEmployeeModel";
-import { INewEmployee, IRequest } from "../interface/Employee";
+import { IRequest } from "../interface/Employee";
 
 const registerEmployee = asyncHandler(async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
