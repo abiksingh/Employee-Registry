@@ -158,7 +158,7 @@ const addComment = asyncHandler(async (req: IRequest, res: Response) => {
 
     employee.comment.push(applyComment);
     await employee.save();
-    res.status(201).json({ message: "Comment added" });
+    res.status(201).json(applyComment);
   } else {
     res.status(404);
     throw new Error("Employee not found");
