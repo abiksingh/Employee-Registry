@@ -21,6 +21,6 @@ router
   .put(protect, editEmployees)
   .delete(protect, deleteEmployee)
   .get(protect, getEmployeeById);
-router.route("/employeeDetails/:id").post(protect, addComment);
+router.route("/employee-details/:id").post(protect, addComment);
 
 export default router;
