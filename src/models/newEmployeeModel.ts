@@ -1,6 +1,27 @@
 import mongoose from "mongoose";
 import { IAddEmployee } from "../interface/Employee";
 
+const commentSchema = new mongoose.Schema(
+  {
+    employee: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Employee",
+    },
+    comment: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const addEmployeeSchema = new mongoose.Schema(
   {
     username: {
@@ -28,6 +49,7 @@ const addEmployeeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    comment: [commentSchema],
   },
   {
     timestamps: true,

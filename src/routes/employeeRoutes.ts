@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  addComment,
   addEmployees,
   authEmployee,
   deleteEmployee,
@@ -18,5 +19,6 @@ router
   .route("/:id")
   .put(protect, editEmployees)
   .delete(protect, deleteEmployee);
+router.route("/employeeDetails/:id").post(protect, addComment);
 
 export default router;

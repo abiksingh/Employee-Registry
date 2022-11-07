@@ -12,4 +12,5 @@ export interface IAddEmployee extends Document {
   lastName: string;
   address: string;
   role: string;
+  comment: any;
 }

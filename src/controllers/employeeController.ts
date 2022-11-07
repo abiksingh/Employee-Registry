@@ -132,6 +132,27 @@ const deleteEmployee = asyncHandler(async (req, res) => {
   }
 });
 
+const addComment = asyncHandler(async (req: any, res) => {
+  const { comment } = req.body;
+
+  const employee = await NewEmployee.findById(req.params.id);
+
+  if (employee) {
+    const applyComment = {
+      employee: req.employee._id,
+      comment,
+      name: req.employee.name,
+    };
+
+    employee.comment.push(applyComment);
+    await employee.save();
+    res.status(201).json({ message: "Comment added" });
+  } else {
+    res.status(404);
+    throw new Error("Employee not found");
+  }
+});
+
 export {
   registerEmployee,
   authEmployee,
@@ -139,4 +160,5 @@ export {
   addEmployees,
   editEmployees,
   deleteEmployee,
+  addComment,
 };
